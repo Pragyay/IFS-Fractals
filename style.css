@@ -1,0 +1,60 @@
+#canvas{
+    position: absolute;
+    bottom: 0;
+    left: 20%;
+    height: 70%;
+    width: 60%;
+    /* background-color: aqua; */
+}
+
+#container{
+    display: flex;
+}
+
+#button_list{
+    display: flex;
+    flex-direction: column;
+    margin-right: 0.3em;
+    width: fit-content;
+}
+
+#button_list button{
+    margin-bottom: 0.3em;
+}
+
+#rules_list{
+    display: flex;
+    /* position: absolute; */
+    /* left: ; */
+}
+
+.rule{
+    background-color: beige;
+    width: fit-content;
+    margin-right: 10px;
+}
+
+.rule h5{
+    margin-top: 0.2em;
+    margin-bottom: 0.3em;
+}
+
+.rule p{
+    font-size: xx-small;
+    margin: 0;
+    /* background-color: blue; */
+}
+
+/* seekbar  */
+.rule input{
+    -webkit-appearance: none;  /* Override default CSS styles */
+    margin: 0;
+    width: 90%; 
+    height: 0.3em; /* Specified height */
+    background: #d3d3d3; /* Grey background */
+    outline: none; /* Remove outline */
+    opacity: 0.7; /* Set transparency (for mouse-over effects on hover) */
+    -webkit-transition: .2s; /* 0.2 seconds transition on hover */
+    transition: opacity .2s;
+    --SliderColor : green;
+    }
