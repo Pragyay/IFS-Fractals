@@ -1,118 +1,108 @@
-let canvas = document.getElementById("canvas"),
-    context = canvas.getContext("2d"),
-    width = canvas.width = window.innerWidth,
-    height = canvas.height = window.innerHeight;
-
-let rules = [
-    {
-        a: 0.05,
-        b: 0,
-        c: 0,
-        d: 0.4,
-        tx: -0.06,
-        ty: -0.47,
-        weight: 0.143,
-        color: "brown"
-    },
-    {
-        a: -0.05,
-        b: 0,
-        c: 0,
-        d: -0.4,
-        tx: -0.06,
-        ty: -0.47,
-        weight: 0.143 ,
-        color: "brown"
-    },
-    {
-        a: 0.03,
-        b: -0.14,
-        c: 0,
-        d: 0.26,
-        tx: -0.16,
-        ty: -0.01,
-        weight: 0.143,
-        color: "brown" 
-    },
-    {
-        a: -0.03,
-        b: 0.14,
-        c: 0,
-        d: -0.26,
-        tx: -0.16,
-        ty: -0.01,
-        weight: 0.143,
-        color: "brown"
-    },
-    {
-        a: 0.56,
-        b: 0.44,
-        c: -0.37,
-        d: 0.51,
-        tx: 0.3,
-        ty: 0.15,
-        weight: 0.143,
-        color: "green"
-    },
-    {
-        a: 0.19,
-        b: 0.07,
-        c: -0.1,
-        d: 0.15,
-        tx: -0.2,
-        ty: 0.28,
-        weight: 0.143,
-        color: "green"
-    },
-    {
-        a: -0.33,
-        b: -0.34,
-        c: -0.33,
-        d: 0.34,
-        tx: -0.54,
-        ty: 0.39,
-        weight: 0.143,
-        color: "green"
-    }
-]
-
-context.translate(width/2, height/2);
-
-let x = Math.random(),
-    y = Math.random();
-
-iterate();
-
 function iterate(){
-    for(let i=0; i<1000; i++){
-        let rule = getRule(),
-            x1 = x * rule.a + y * rule.b + rule.tx,
-            y1 = x * rule.c + y * rule.d + rule.ty;
+    for(let j=0; j<100; j++){
+        let rand = Math.random();
+        let rule;
+        for(let i = 0; i < 4; i++){
+            let r = rules[i];
+            // console.log(r.W);
+            if(rand < r.W){
+                rule = r;
+                break;
+            }else{  
+                rand -= r.W;
+            }
+        }
+        // console.log(`${j}th iteration`);
+        let x1 = x * rule.A + y * rule.B + rule.E,
+            y1 = x * rule.C + y * rule.D + rule.F;
+        // console.log(`in iterate()${i}`);
         x = x1;
         y = y1;
-        // plot(x, y, rule.color);
+
+        // console.log(`x = ${x}, y = ${y}`);
         plot(x, y);
     }
     requestAnimationFrame(iterate);
 }
 
-function getRule(){
-    let rand = Math.random();
-    for(let i=0; i < rules.length; i++){
-        let rule = rules[i];
-        if(rand < rule.weight){
-            return rule;
-        }
-        rand -= rule.weight;
-    }
-}
-
-// function plot(x, y, color){
-//     context.fillStyle = color;
-//     context.fillRect(x * 300, -y * 300, 1, 1);
+// function getRule(rules){
+//     let rand = Math.random();
+//     for(let i = 0; i < 4; i++){
+//         let rule = rules[i];
+//         console.log(rule);
+//         if(rand < rule.W){
+//             return rule;
+//         }
+//         // console.log("getRule() done");
+//         rand -= rule.W;
+//     }
 // }
 
 function plot(x, y){
-    // context.fillStyle = "white";
-    context.fillRect(x * 300, -y * 300, 1, 1);
+    context.fillStyle = "black";
+    context.fillRect(x * 60, -y * 60, 1, 1);
 }
+
+function init(rules){
+
+    for(let i=1;i<=4;i++){
+        let a = document.getElementById(`a${i}`),
+            b = document.getElementById(`b${i}`),
+            c = document.getElementById(`c${i}`),
+            d = document.getElementById(`d${i}`),
+            e = document.getElementById(`e${i}`),
+            f = document.getElementById(`f${i}`),
+            weight = document.getElementById(`weight${i}`);
+        
+        // console.log("added parameters");
+
+        let rule = {
+            A: parseFloat(a.value),
+            B: parseFloat(b.value),
+            C: parseFloat(c.value),
+            D: parseFloat(d.value),
+            E: parseFloat(e.value),
+            F: parseFloat(f.value),
+            W: parseFloat(weight.value)
+        };
+
+        // console.log(rule);  
+    
+        rules[i-1] = rule;
+    }
+    console.log(rules);
+}
+
+let canvas = document.getElementById("canvas"),
+    context = canvas.getContext("2d"),
+    width = canvas.width = window.innerWidth,
+    height = canvas.height = window.innerHeight,
+    rules = [];
+
+context.translate(width/2, height);
+init(rules);
+// console.log("breaks after init()");
+
+let x = Math.random(),
+    y = Math.random();
+
+iterate();
+// console.log("breaks after iterate()");
+
+let applyBtn = document.getElementById("apply");
+applyBtn.addEventListener('click', function(){
+    console.log("apply btn clicked");
+    context.clearRect(-width/2, -height, width, height);
+    rules = [];
+
+    x = Math.random();
+    y = Math.random();
+
+    init(rules); 
+    // console.log("breaks after init()");
+    
+    
+    iterate();
+    // console.log("breaks after iterate()");
+    
+}); 
