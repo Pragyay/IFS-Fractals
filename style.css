@@ -1,10 +1,14 @@
+body{
+    background-color: black;
+    color: white;
+}
 #canvas{
     position: absolute;
     bottom: 0;
     left: 20%;
     height: 70%;
     width: 60%;
-    /* background-color: aqua  ; */
+    /* background-color: aqua; */
     z-index: -1;
 }
 
@@ -43,6 +47,7 @@
 .rule p{
     font-size: smaller;
     margin: 0;
+    font-family: 'Courier New', Courier, monospace;
     /* background-color: blue; */
 }
 
@@ -50,7 +55,7 @@
 .rule input{
      /* Override default CSS styles */
     margin: 0;
-    width: 40%; 
+    width: 90%; 
     height: fit-content; /* Specified height */
     background: #d3d3d3; /* Grey background */
     outline: none; /* Remove outline */
