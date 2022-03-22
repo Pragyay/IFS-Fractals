@@ -15,6 +15,9 @@ function iterate(){
         plot(x, y);
     }
 
+    if(paused){
+        return;
+    }
     requestAnimationFrame(iterate);
 }
 
@@ -99,12 +102,8 @@ function updateValue(ele, value){
 
     // update textview as user changes input
     obj.previousElementSibling.innerHTML = `${parameter}: ${value}`;
-}
 
-// update parameters and canvas when apply button is clicked
-let applyBtn = document.getElementById("apply");
-applyBtn.addEventListener('click', function(){
-    // clear canvas
+    //clear canvas
     context.clearRect(-width/2, -height, width, height);
 
     // clear rules array
@@ -117,15 +116,32 @@ applyBtn.addEventListener('click', function(){
     // reinitialize rules array
     init(rules); 
     
+    if(paused){
+        paused = false;
+        pauseBtn.innerHTML = "Pause";
+    }
     // render fractal with new parameter
     iterate();
+}
+
+// update parameters and canvas when apply button is clicked
+let pauseBtn = document.getElementById("pauseBtn");
+pauseBtn.addEventListener('click', function(){
+    paused = !paused;
+    if(!paused){
+        iterate();
+        pauseBtn.innerHTML = "Pause";
+    }else{
+        pauseBtn.innerHTML = "Start";
+    }
 }); 
 
 let canvas = document.getElementById("canvas"),
     context = canvas.getContext("2d"),
     width = canvas.width = window.innerWidth,
     height = canvas.height = window.innerHeight,
-    rules = [];
+    rules = [],
+    paused = false;
 
 context.translate(width/2, height);
 
