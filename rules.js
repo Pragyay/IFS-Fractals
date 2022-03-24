@@ -89,7 +89,7 @@ function init(rules){
     console.log(rules);
 }
 
-// update text field when user changes value
+// update text field and canvas when user changes value
 function updateValue(ele, value){
     // get id of element that called updateValue() function
     let id = ele.id;
@@ -120,8 +120,7 @@ function updateValue(ele, value){
         paused = false;
         pauseBtn.innerHTML = "Pause";
     }
-    // render fractal with new parameter
-    iterate();
+    // iterate();
 }
 
 // update parameters and canvas when apply button is clicked

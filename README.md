@@ -1,4 +1,5 @@
-Interactive IFS Fractals Website where IFS fractals are generated in realtime and user can mess around with the parameters to generate different fractals.
+<h1>Interactive IFS Fractals</h1> 
+Generate IFS fractals in realtime and mess around with the parameters to generate different fractals.
 
 Made using HTML, CSS and JavaScript.
 
