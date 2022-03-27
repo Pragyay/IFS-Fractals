@@ -1,6 +1,6 @@
 // function that draws the fractals
 function iterate(){
-    for(let j=0; j<100; j++){
+    for(let j=0; j<1000; j++){
         // choose a rule
         let rule = getRule(rules);
         
@@ -18,13 +18,13 @@ function iterate(){
     if(paused){
         return;
     }
-    requestAnimationFrame(iterate);
+    // requestAnimationFrame(iterate);
 }
 
 // choosing a rule based on specified weight
 function getRule(rules){
     let rand = Math.random();
-    for(let i = 0; i < 4; i++){
+    for(let i = 0; i < 3; i++){
         let rule = rules[i];
         if(rand < rule.W){
             return rule;
@@ -36,32 +36,31 @@ function getRule(rules){
 // plot a rectangle at position (x,y)
 function plot(x, y){
     context.fillStyle = "white";
-    context.fillRect(x * 100, -y * 100, 1, 1);
+    context.fillRect(x * 400, -y * 400, 1, 1);
 }
 
 // initializes rules array
 function init(rules){
 
-    for(let i=1;i<=4;i++){
+    for(let i=1;i<=3;i++){
 
         // get all input sliders by ID
-        let a = document.getElementById(`a${i}`),
-            b = document.getElementById(`b${i}`),
-            c = document.getElementById(`c${i}`),
-            d = document.getElementById(`d${i}`),
-            e = document.getElementById(`e${i}`),
-            f = document.getElementById(`f${i}`),
-            weight = document.getElementById(`weight${i}`);
+        let angle = (document.getElementById(`a${i}`).value),
+            sx = (document.getElementById(`b${i}`).value),
+            sy = (document.getElementById(`c${i}`).value),
+            tx = (document.getElementById(`d${i}`).value),
+            ty = (document.getElementById(`e${i}`).value),
+            weight = (document.getElementById(`weight${i}`).value);
         
         // add values of all input sliders to corresponding parameters of the rule
         let rule = {
-            A: parseFloat(a.value),
-            B: parseFloat(b.value),
-            C: parseFloat(c.value),
-            D: parseFloat(d.value),
-            E: parseFloat(e.value),
-            F: parseFloat(f.value),
-            W: parseFloat(weight.value)
+            A: +(Math.cos(angle)*sx).toFixed(2),
+            B: +(Math.sin(angle)*sy).toFixed(2),
+            C: +(-Math.sin(angle)*sx).toFixed(2),
+            D: +(Math.cos(angle)*sy).toFixed(2),
+            E: parseFloat(tx),
+            F: parseFloat(ty),
+            W: parseFloat(weight)
         };
 
         // display values in textviews above the sliders
@@ -72,16 +71,14 @@ function init(rules){
             c_para = div.getElementsByTagName('p')[2],
             d_para = div.getElementsByTagName('p')[3],
             e_para = div.getElementsByTagName('p')[4],
-            f_para = div.getElementsByTagName('p')[5],
-            weight_para = div.getElementsByTagName('p')[6];
+            weight_para = div.getElementsByTagName('p')[5];
 
-        a_para.innerHTML = `A: ${rule.A}`;
-        b_para.innerHTML = `B: ${rule.B}`;
-        c_para.innerHTML = `C: ${rule.C}`;
-        d_para.innerHTML = `D: ${rule.D}`;
-        e_para.innerHTML = `E: ${rule.E}`;
-        f_para.innerHTML = `F: ${rule.F}`;
-        weight_para.innerHTML = `Weight: ${rule.W}`;
+        a_para.innerHTML = `Rotation: ${angle}`;
+        b_para.innerHTML = `ScaleX: ${sx}`;
+        c_para.innerHTML = `ScaleY: ${sy}`;
+        d_para.innerHTML = `TranslateX: ${tx}`;
+        e_para.innerHTML = `TranslateY: ${ty}`;
+        weight_para.innerHTML = `Weight: ${weight}`;
         
         // append rule to rules[] array
         rules[i-1] = rule;
@@ -93,13 +90,13 @@ function init(rules){
 function updateValue(ele, value){
     // get id of element that called updateValue() function
     let id = ele.id;
+    let class_name = ele.className;
     
     let obj = document.getElementById(`${id}`);
 
     // little string manipulation to display parameter name in textview
-    let parameter = id.slice(0,-1);
-    parameter = parameter.charAt(0).toUpperCase() + parameter.slice(1);
-
+    let parameter = obj.previousElementSibling.textContent.split(':')[0];
+    
     // update textview as user changes input
     obj.previousElementSibling.innerHTML = `${parameter}: ${value}`;
 
@@ -110,8 +107,28 @@ function updateValue(ele, value){
     rules = [];
 
     // choose new X and Y values randomly
-    x = Math.random();
-    y = Math.random();
+    if(class_name === "rotate"){
+        let angle = parseFloat(obj.value);
+
+        x1 = Math.cos(angle)*x + Math.sin(angle)*y;
+        y1 = -Math.sin(angle)*x + Math.cos(angle)*y;
+
+        x = x1;
+        y = y1;
+
+    }else if(class_name === "scale"){
+        let sx = parseFloat(obj.value),
+            sy = parseFloat(obj.value);
+
+        x = sx*x;
+        y = sy*y;
+    }else{
+        let tx = parseFloat(obj.value),
+            ty = parseFloat(obj.value);
+
+        x = x + tx;
+        y = y + ty;
+    }
 
     // reinitialize rules array
     init(rules); 
@@ -120,7 +137,7 @@ function updateValue(ele, value){
         paused = false;
         pauseBtn.innerHTML = "Pause";
     }
-    // iterate();
+    iterate();
 }
 
 // update parameters and canvas when apply button is clicked
