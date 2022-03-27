@@ -1,6 +1,6 @@
 // function that draws the fractals
 function iterate(){
-    for(let j=0; j<1000; j++){
+    for(let j=0; j<300; j++){
         // choose a rule
         let rule = getRule(rules);
         
@@ -18,7 +18,7 @@ function iterate(){
     if(paused){
         return;
     }
-    // requestAnimationFrame(iterate);
+    requestAnimationFrame(iterate);
 }
 
 // choosing a rule based on specified weight
@@ -36,7 +36,7 @@ function getRule(rules){
 // plot a rectangle at position (x,y)
 function plot(x, y){
     context.fillStyle = "white";
-    context.fillRect(x * 400, -y * 400, 1, 1);
+    context.fillRect(x * 600, -y * 600, 1, 1);
 }
 
 // initializes rules array
@@ -96,7 +96,7 @@ function updateValue(ele, value){
 
     // little string manipulation to display parameter name in textview
     let parameter = obj.previousElementSibling.textContent.split(':')[0];
-    
+
     // update textview as user changes input
     obj.previousElementSibling.innerHTML = `${parameter}: ${value}`;
 
@@ -137,7 +137,7 @@ function updateValue(ele, value){
         paused = false;
         pauseBtn.innerHTML = "Pause";
     }
-    iterate();
+    // iterate();
 }
 
 // update parameters and canvas when apply button is clicked
