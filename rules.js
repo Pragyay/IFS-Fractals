@@ -1,6 +1,6 @@
 // function that draws the fractals
 function iterate(){
-    for(let j=0; j<300; j++){
+    for(let j=0; j<500; j++){
         // choose a rule
         let rule = getRule(rules);
         
@@ -24,7 +24,7 @@ function iterate(){
 // choosing a rule based on specified weight
 function getRule(rules){
     let rand = Math.random();
-    for(let i = 0; i < 3; i++){
+    for(let i = 0; i < rule_number; i++){
         let rule = rules[i];
         if(rand < rule.W){
             return rule;
@@ -36,21 +36,21 @@ function getRule(rules){
 // plot a rectangle at position (x,y)
 function plot(x, y){
     context.fillStyle = "white";
-    context.fillRect(x * 600, -y * 600, 1, 1);
+    context.fillRect(x * 800, -y * 800, 1, 1);
 }
 
 // initializes rules array
 function init(rules){
 
-    for(let i=1;i<=3;i++){
+    for(let i=1;i <= rule_number;i++){
 
         // get all input sliders by ID
-        let angle = (document.getElementById(`a${i}`).value),
-            sx = (document.getElementById(`b${i}`).value),
-            sy = (document.getElementById(`c${i}`).value),
-            tx = (document.getElementById(`d${i}`).value),
-            ty = (document.getElementById(`e${i}`).value),
-            weight = (document.getElementById(`weight${i}`).value);
+        let angle = (document.querySelector(`#a${i}`).value),
+            sx = (document.querySelector(`#b${i}`).value),
+            sy = (document.querySelector(`#c${i}`).value),
+            tx = (document.querySelector(`#d${i}`).value),
+            ty = (document.querySelector(`#e${i}`).value),
+            weight = (document.querySelector(`#weight${i}`).value);
         
         // add values of all input sliders to corresponding parameters of the rule
         let rule = {
@@ -101,7 +101,7 @@ function updateValue(ele, value){
     obj.previousElementSibling.innerHTML = `${parameter}: ${value}`;
 
     //clear canvas
-    context.clearRect(-width/2, -height, width, height);
+    context.clearRect(-width/4, -height, width, height);
 
     // clear rules array
     rules = [];
@@ -152,6 +152,57 @@ pauseBtn.addEventListener('click', function(){
     }
 }); 
 
+let add_rule_btn = document.getElementById("add_rule"),
+    remove_rule_btn = document.getElementById("remove_rule");
+
+let rules_list_div = document.getElementById("rules_list");
+
+let rule_number = 1;
+
+add_rule_btn.addEventListener("click", function(){
+        // alert("btn clicked");
+        let rule = document.createElement("div");
+        
+        rule_number += 1;
+        // console.log(rule_number);
+
+        rule.innerHTML = `<div id="div${rule_number}" class="rule">
+        <h5>Rule ${rule_number}</h5>
+        <p>Rotate </p>
+        <input id = "a${rule_number}" class="rotate" type="range" min="0" max="6.28" step=".04" value="0" onchange="updateValue(this, this.value)">
+        <p>ScaleX </p>
+        <input id = "b${rule_number}" class="scale" type="range" min="0" max="1" step=".01" value="0.5" onchange="updateValue(this, this.value)">
+        <p>ScaleY </p>
+        <input id = "c${rule_number}" class="scale" type="range" min="0" max="1" step=".01" value="0.5" onchange="updateValue(this, this.value)">
+        <p>TranslateX </p>
+        <input id = "d${rule_number}" class="translate" type="range" min="0" max="1" step=".01" value="0.25" onchange="updateValue(this, this.value)">
+        <p>TranslateY </p>
+        <input id = "e${rule_number}" class="translate" type="range" min="0" max="1" step=".01" value="0.35" onchange="updateValue(this, this.value)">
+        <p>Weight </p>
+        <input id = "weight${rule_number}" type="range" min="0" max="1" step=".01" value="0.35 " onchange="updateValue(this, this.value)">
+    </div>`
+        
+        rules_list_div.appendChild(rule);
+
+        // rules.push(rule);
+        rules = [];
+        init(rules);
+        // console.log(rules);  
+});
+
+remove_rule_btn.addEventListener("click", function(){
+    
+    if(rule_number > 0){
+        let rule = document.querySelector(`#div${rule_number}`);
+        rule.remove();
+        rule_number -= 1;
+        rules.pop();
+        console.log(rules);
+        // console.log(rule_number);
+    }
+});
+
+
 let canvas = document.getElementById("canvas"),
     context = canvas.getContext("2d"),
     width = canvas.width = window.innerWidth,
@@ -159,7 +210,7 @@ let canvas = document.getElementById("canvas"),
     rules = [],
     paused = false;
 
-context.translate(width/2, height);
+context.translate(width/4, height);
 
 init(rules);
 
