@@ -20,7 +20,7 @@ body{
     display: flex;
     flex-direction: column;
     margin-right: 0.3em;
-    width: 4%;
+    width: 5%;
 }
 
 #button_list button{

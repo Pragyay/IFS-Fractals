@@ -12,30 +12,30 @@
     <div id="container">
         <div id="button_list">
             <button id="pauseBtn">Pause</button>
-            <!-- <button id="remove_rule">Remove rule</button>
-            <button id="add_rule">Add rule</button> -->
+            <button id="remove_rule">Remove rule</button>
+            <button id="add_rule">Add rule</button>
         </div>
 
         <div id="rules_list">
             <div id="div1" class="rule">
                 <h5>Rule 1</h5>
                 <p>A </p>
-                <input id = "a1" type="range" min="-1" max="1" step=".01" value="0" onchange="updateValue(this, this.value)">
+                <input id = "a1" type="range" min="-1" max="1" step=".01" value="0" oninput="updateValue(this, this.value)">
                 <p>B </p>
-                <input id = "b1" type="range" min="-1" max="1" step=".01" value="0" onchange="updateValue(this, this.value)">
+                <input id = "b1" type="range" min="-1" max="1" step=".01" value="0" oninput="updateValue(this, this.value)">
                 <p>C </p>
-                <input id = "c1" type="range" min="-1" max="1" step=".01" value="0" onchange="updateValue(this, this.value)">
+                <input id = "c1" type="range" min="-1" max="1" step=".01" value="0" oninput="updateValue(this, this.value)">
                 <p>D </p>
-                <input id = "d1" type="range" min="-1" max="1" step=".01" value="0.2" onchange="updateValue(this, this.value)">
+                <input id = "d1" type="range" min="-1" max="1" step=".01" value="0.2" oninput="updateValue(this, this.value)">
                 <p>E </p>
-                <input id = "e1" type="range" min="-1" max="1" step=".01" value="0" onchange="updateValue(this, this.value)">
+                <input id = "e1" type="range" min="-1" max="1" step=".01" value="0" oninput="updateValue(this, this.value)">
                 <p>F </p>
-                <input id = "f1" type="range" min="-1" max="1" step=".01" value="0.01" onchange="updateValue(this, this.value)">
+                <input id = "f1" type="range" min="-1" max="1" step=".01" value="0.01" oninput="updateValue(this, this.value)">
                 <p>Weight </p>
-                <input id = "weight1" type="range" min="0" max="1" step=".01" value="0.01" onchange="updateValue(this, this.value)">
+                <input id = "weight1" type="range" min="0" max="1" step=".01" value="0.01" oninput="updateValue(this, this.value)">
             </div>
 
-            <div id="div2" class="rule">
+            <!-- <div id="div2" class="rule">
                 <h5>Rule 2  </h5>
                 <p>A </p>
                 <input id = "a2" type="range" min="-1" max="1" step=".01" value="0.85" onchange="updateValue(this, this.value)">
@@ -87,7 +87,7 @@
                 <input id = "f4" type="range" min="-1" max="1" step=".01" value="0.44" onchange="updateValue(this, this.value)">
                 <p>Weight </p>
                 <input id = "weight4" type="range" min="0" max="1" step=".01" value="0.07" onchange="updateValue(this, this.value)">
-            </div>
+            </div> -->
 
         </div>
     </div>
