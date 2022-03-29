@@ -1,13 +1,13 @@
 // function that draws the fractals
 function iterate(){
-    for(let j=0; j<500; j++){
+    for(let j=0; j<300; j++){
         // choose a rule
         let rule = getRule(rules);
         
         // use the rule parameters to get X and Y coordinates
         let x1 = x * rule.A + y * rule.B + rule.E,
             y1 = x * rule.C + y * rule.D + rule.F;
-        
+            
         x = x1;
         y = y1;
 
@@ -169,17 +169,17 @@ add_rule_btn.addEventListener("click", function(){
         rule.innerHTML = `<div id="div${rule_number}" class="rule">
         <h5>Rule ${rule_number}</h5>
         <p>Rotate </p>
-        <input id = "a${rule_number}" class="rotate" type="range" min="0" max="6.28" step=".04" value="0" onchange="updateValue(this, this.value)">
+        <input id = "a${rule_number}" class="rotate" type="range" min="0" max="6.28" step=".04" value="0" oninput="updateValue(this, this.value)">
         <p>ScaleX </p>
-        <input id = "b${rule_number}" class="scale" type="range" min="0" max="1" step=".01" value="0.5" onchange="updateValue(this, this.value)">
+        <input id = "b${rule_number}" class="scale" type="range" min="0" max="1" step=".01" value="0.5" oninput="updateValue(this, this.value)">
         <p>ScaleY </p>
-        <input id = "c${rule_number}" class="scale" type="range" min="0" max="1" step=".01" value="0.5" onchange="updateValue(this, this.value)">
+        <input id = "c${rule_number}" class="scale" type="range" min="0" max="1" step=".01" value="0.5" oninput="updateValue(this, this.value)">
         <p>TranslateX </p>
-        <input id = "d${rule_number}" class="translate" type="range" min="0" max="1" step=".01" value="0.25" onchange="updateValue(this, this.value)">
+        <input id = "d${rule_number}" class="translate" type="range" min="0" max="1" step=".01" value="0.25" oninput="updateValue(this, this.value)">
         <p>TranslateY </p>
-        <input id = "e${rule_number}" class="translate" type="range" min="0" max="1" step=".01" value="0.35" onchange="updateValue(this, this.value)">
+        <input id = "e${rule_number}" class="translate" type="range" min="0" max="1" step=".01" value="0.35" oninput="updateValue(this, this.value)">
         <p>Weight </p>
-        <input id = "weight${rule_number}" type="range" min="0" max="1" step=".01" value="0.35 " onchange="updateValue(this, this.value)">
+        <input id = "weight${rule_number}" type="range" min="0" max="1" step=".01" value="0.35 " oninput="updateValue(this, this.value)">
     </div>`
         
         rules_list_div.appendChild(rule);
