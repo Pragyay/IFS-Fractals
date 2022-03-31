@@ -19,16 +19,17 @@ body{
 #button_list{
     display: flex;
     flex-direction: column;
-    margin-right: 0.3em;
-    width: 5%;
+    /* margin-right: 0.3em; */
+    width: fit-content;
 }
 
 #button_list button{
-    margin-bottom: 0.3em;
+    margin-bottom: 0.7em;
 }
 
 #rules_list{
     display: flex;
+    margin-left: 1em;
     /* position: absolute; */
     /* left: ; */
 }

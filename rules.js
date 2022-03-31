@@ -1,6 +1,8 @@
 // function that draws the fractals
 function iterate(){
-    for(let j=0; j<300; j++){
+    console.log("iterate called");
+    
+    for(let j=0; j<200; j++){
         // choose a rule
         let rule = getRule(rules);
         
@@ -16,9 +18,10 @@ function iterate(){
     }
 
     if(paused){
+        cancelAnimationFrame(id);
         return;
     }
-    requestAnimationFrame(iterate);
+    let id = requestAnimationFrame(iterate);
 }
 
 // choosing a rule based on specified weight
@@ -33,10 +36,11 @@ function getRule(rules){
     }
 }
 
+
 // plot a rectangle at position (x,y)
 function plot(x, y){
     context.fillStyle = "white";
-    context.fillRect(x * 600, -y * 600, 1, 1);
+    context.fillRect(x * 60, -y * 60, 1, 1);
 }
 
 // initializes rules array
@@ -119,13 +123,74 @@ function updateValue(ele, value){
     if(paused){
         paused = false;
         pauseBtn.innerHTML = "Pause";
+        iterate();
     }
-    // iterate();
 }
 
-// update parameters and canvas when apply button is clicked
-let pauseBtn = document.getElementById("pauseBtn");
-pauseBtn.addEventListener('click', function(){
+// function to add a rule with default values
+function addRule(){
+    let rule = document.createElement("div");
+
+    rule_number += 1;
+    // console.log(rule_number);
+
+    rule.innerHTML = `<div id="div${rule_number}" class="rule">
+    <h5>Rule ${rule_number}</h5>
+    <p>A </p>
+    <input id = "a${rule_number}" type="range" min="-1" max="1" step=".01" value="0" oninput="updateValue(this, this.value)">
+    <p>B </p>
+    <input id = "b${rule_number}" type="range" min="-1" max="1" step=".01" value="0" oninput="updateValue(this, this.value)">
+    <p>C </p>
+    <input id = "c${rule_number}" type="range" min="-1" max="1" step=".01" value="0" oninput="updateValue(this, this.value)">
+    <p>D </p>
+    <input id = "d${rule_number}" type="range" min="-1" max="1" step=".01" value="0.2" oninput="updateValue(this, this.value)">
+    <p>E </p>
+    <input id = "e${rule_number}" type="range" min="-2" max="2" step=".01" value="0" oninput="updateValue(this, this.value)">
+    <p>F </p>
+    <input id = "f${rule_number}" type="range" min="-2" max="2" step=".01" value="0.01" oninput="updateValue(this, this.value)">
+    <p>Weight </p>
+    <input id = "weight${rule_number}" type="range" min="0" max="1" step=".01" value="0.01" oninput="updateValue(this, this.value)">
+    </div>`
+
+    rules_list_div.appendChild(rule);
+
+    // rules.push(rule);
+    rules = [];
+    init(rules);
+    // console.log(rules);  
+    
+}
+
+// function to add a rule with specified values
+function addRuleWithValues(fractal){
+    let rule = document.createElement("div");
+
+    rule_number += 1;
+    // console.log(rule_number);
+
+    rule.innerHTML = `<div id="div${rule_number}" class="rule">
+    <h5>Rule ${rule_number}</h5>
+    <p>A </p>
+    <input id = "a${rule_number}" type="range" min="-1" max="1" step=".01" value="${fractal.a}" oninput="updateValue(this, this.value)">
+    <p>B </p>
+    <input id = "b${rule_number}" type="range" min="-1" max="1" step=".01" value="${fractal.b}" oninput="updateValue(this, this.value)">
+    <p>C </p>
+    <input id = "c${rule_number}" type="range" min="-1" max="1" step=".01" value="${fractal.c}" oninput="updateValue(this, this.value)">
+    <p>D </p>
+    <input id = "d${rule_number}" type="range" min="-1" max="1" step=".01" value="${fractal.d}" oninput="updateValue(this, this.value)">
+    <p>E </p>
+    <input id = "e${rule_number}" type="range" min="-2" max="2" step=".01" value="${fractal.e}" oninput="updateValue(this, this.value)">
+    <p>F </p>
+    <input id = "f${rule_number}" type="range" min="-2" max="2" step=".01" value="${fractal.f}" oninput="updateValue(this, this.value)">
+    <p>Weight </p>
+    <input id = "weight${rule_number}" type="range" min="0" max="1" step=".01" value="${fractal.weight}" oninput="updateValue(this, this.value)">
+    </div>`
+
+    rules_list_div.appendChild(rule);
+
+}
+
+function pauseUnpause(){
     paused = !paused;
     if(!paused){
         iterate();
@@ -133,6 +198,12 @@ pauseBtn.addEventListener('click', function(){
     }else{
         pauseBtn.innerHTML = "Start";
     }
+}
+
+// update parameters and canvas when apply button is clicked
+let pauseBtn = document.getElementById("pauseBtn");
+pauseBtn.addEventListener('click', function(){
+    pauseUnpause();
 }); 
 
 let add_rule_btn = document.getElementById("add_rule"),
@@ -140,39 +211,11 @@ let add_rule_btn = document.getElementById("add_rule"),
 
 let rules_list_div = document.getElementById("rules_list");
 
-let rule_number = 1;
+let rule_number = 4;
 
 add_rule_btn.addEventListener("click", function(){
         // alert("btn clicked");
-        let rule = document.createElement("div");
-
-        rule_number += 1;
-        // console.log(rule_number);
-
-        rule.innerHTML = `<div id="div${rule_number}" class="rule">
-        <h5>Rule ${rule_number}</h5>
-        <p>A </p>
-        <input id = "a${rule_number}" type="range" min="-1" max="1" step=".01" value="0" oninput="updateValue(this, this.value)">
-        <p>B </p>
-        <input id = "b${rule_number}" type="range" min="-1" max="1" step=".01" value="0" oninput="updateValue(this, this.value)">
-        <p>C </p>
-        <input id = "c${rule_number}" type="range" min="-1" max="1" step=".01" value="0" oninput="updateValue(this, this.value)">
-        <p>D </p>
-        <input id = "d${rule_number}" type="range" min="-1" max="1" step=".01" value="0.2" oninput="updateValue(this, this.value)">
-        <p>E </p>
-        <input id = "e${rule_number}" type="range" min="-1" max="1" step=".01" value="0" oninput="updateValue(this, this.value)">
-        <p>F </p>
-        <input id = "f${rule_number}" type="range" min="-1" max="1" step=".01" value="0.01" oninput="updateValue(this, this.value)">
-        <p>Weight </p>
-        <input id = "weight${rule_number}" type="range" min="0" max="1" step=".01" value="0.01" oninput="updateValue(this, this.value)">
-    </div>`
-
-        rules_list_div.appendChild(rule);
-
-        // rules.push(rule);
-        rules = [];
-        init(rules);
-        // console.log(rules);  
+        addRule();
 });
 
 remove_rule_btn.addEventListener("click", function(){
@@ -186,6 +229,56 @@ remove_rule_btn.addEventListener("click", function(){
         // console.log(rule_number);
     }
 });
+
+function updateParameters(){
+    paused = true;
+    // get the fractal that is selected
+    let option = document.getElementById("fractal");
+    let selected_fractal = option.options[option.selectedIndex].value;
+
+    // clear rules <div> inside rules_list <div>
+    while(rules_list_div.firstChild){
+            rules_list_div.removeChild(rules_list_div.lastChild);
+    }
+    // reset rule_number to 0
+    rule_number = 0;
+
+    // clear rules array
+    rules = [];
+
+    // clear canvas
+    context.clearRect(-width/2, -height, width, height);
+
+    if(selected_fractal === "Barnsley Fern"){
+        // console.log("updated parameters 1");
+        for(let i=0;i<4;i++){
+            addRuleWithValues(BarnsleyFern[i]);
+        }
+        init(rules);
+    }
+    else if(selected_fractal === "Mandlebrot Like"){
+        // console.log("updated parameters 2");
+        for(let i=0;i<2;i++){
+            addRuleWithValues(MandlebrotLike[i]);
+        }
+        init(rules);
+    }
+    else if(selected_fractal === "IFS Dragon"){
+        // console.log("updated parameters 2");
+        for(let i=0;i<2;i++){
+            addRuleWithValues(IFSDragon[i]);
+        }
+        init(rules);
+    }
+    else if(selected_fractal === "Maple Leaf"){
+        // console.log("updated parameters 2");
+        for(let i=0;i<4;i++){
+            addRuleWithValues(MapleLeaf[i]);
+        }
+        init(rules);
+    }
+    pauseUnpause();
+}
 
 let canvas = document.getElementById("canvas"),
     context = canvas.getContext("2d"),
