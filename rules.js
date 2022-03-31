@@ -161,7 +161,7 @@ function addRule(){
     
 }
 
-// function to add a rule with specified values
+// function to add a rule with pre-defined values of specified fractal
 function addRuleWithValues(fractal){
     let rule = document.createElement("div");
 
@@ -190,6 +190,7 @@ function addRuleWithValues(fractal){
 
 }
 
+// pause/unpause and update html of pauseBtn accordingly
 function pauseUnpause(){
     paused = !paused;
     if(!paused){
@@ -213,11 +214,13 @@ let rules_list_div = document.getElementById("rules_list");
 
 let rule_number = 4;
 
+// add a rule
 add_rule_btn.addEventListener("click", function(){
         // alert("btn clicked");
         addRule();
 });
 
+// remove a rule
 remove_rule_btn.addEventListener("click", function(){
 
     if(rule_number > 0){
@@ -230,6 +233,12 @@ remove_rule_btn.addEventListener("click", function(){
     }
 });
 
+// called when user selects a fractal from dropdown
+// - clears all <divs> inside rules_list <div>
+// - clears rules[] array
+// - clears canvas
+// - then calls addRuleWithValues(fractal_name)
+
 function updateParameters(){
     paused = true;
     // get the fractal that is selected
@@ -241,7 +250,7 @@ function updateParameters(){
             rules_list_div.removeChild(rules_list_div.lastChild);
     }
     // reset rule_number to 0
-    rule_number = 0;
+    rule_number = 0;    
 
     // clear rules array
     rules = [];
