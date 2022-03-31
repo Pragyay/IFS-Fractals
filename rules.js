@@ -40,7 +40,7 @@ function getRule(rules){
 // plot a rectangle at position (x,y)
 function plot(x, y){
     context.fillStyle = "white";
-    context.fillRect(x * 60, -y * 60, 1, 1);
+    context.fillRect(x * 60, -y * 60 - 100, 1, 1);
 }
 
 // initializes rules array
@@ -190,7 +190,11 @@ function addRuleWithValues(fractal){
 
 }
 
-// pause/unpause and update html of pauseBtn accordingly
+//  if(paused){
+//     unpause, call iterate() and update html of pauseBtn accordingly
+// } else{
+//     pause and update html of pauseBtn accordingly
+// }
 function pauseUnpause(){
     paused = !paused;
     if(!paused){
@@ -224,10 +228,12 @@ add_rule_btn.addEventListener("click", function(){
 remove_rule_btn.addEventListener("click", function(){
 
     if(rule_number > 0){
+        // paused = true;
         let rule = document.querySelector(`#div${rule_number}`);
         rule.remove();
         rule_number -= 1;
         rules.pop();
+        // pauseUnpause();
         console.log(rules);
         // console.log(rule_number);
     }
@@ -265,10 +271,10 @@ function updateParameters(){
         }
         init(rules);
     }
-    else if(selected_fractal === "Mandlebrot Like"){
+    else if(selected_fractal === "Vortex"){
         // console.log("updated parameters 2");
         for(let i=0;i<2;i++){
-            addRuleWithValues(MandlebrotLike[i]);
+            addRuleWithValues(Vortex[i]);
         }
         init(rules);
     }
