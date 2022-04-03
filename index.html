@@ -13,17 +13,8 @@
         <div id="button_list">
             <button id="pauseBtn">Pause</button>
             <button id="remove_rule">Remove rule</button>
-            <button id="add_rule">Add rule</button>
-
-            <form action="#">
-                <select name="fractal" id="fractal" onchange="updateParameters();">
-                    <option value="Barnsley Fern">Barnsley Fern</option>
-                    <option value="Vortex">Vortex</option>
-                    <option value="IFS Dragon">IFS Dragon</option>
-                    <option value="Maple Leaf">Maple Leaf</option>
-                </select>
-            </form>
-
+            <button id="add_rule">Add rule</button> 
+            <button id="resetBtn">Reset</button>
         </div>
 
 
@@ -44,6 +35,8 @@
                 <input id = "f1" type="range" min="-2" max="2" step=".01" value="0.01" oninput="updateValue(this, this.value)">
                 <p>Weight </p>
                 <input id = "weight1" type="range" min="0" max="1" step=".01" value="0.01" oninput="updateValue(this, this.value)">
+                <p>Color</p>
+                <input id = "color1" type="color" value="#FFFF00" oninput="updateValue(this, this.value)">
             </div>
 
             <div id="div2" class="rule">
@@ -62,6 +55,8 @@
                 <input id = "f2" type="range" min="-2" max="2" step=".01" value="1.6" oninput ="updateValue(this, this.value)">
                 <p>Weight </p>
                 <input id = "weight2" type="range" min="0" max="1" step=".01" value="0.85" oninput ="updateValue(this, this.value)">
+                <p>Color</p>
+                <input id = "color2" type="color" value="#24D82A" oninput="updateValue(this, this.value)">
             </div>
 
             <div id="div3" class="rule">
@@ -80,6 +75,8 @@
                 <input id = "f3" type="range" min="-2" max="2" step=".01" value="1.6" oninput ="updateValue(this, this.value)">
                 <p>Weight </p>
                 <input id = "weight3" type="range" min="0" max="1" step=".01" value="0.07" oninput ="updateValue(this, this.value)">
+                <p>Color</p>
+                <input id = "color3" type="color" value="#CC0000" oninput="updateValue(this, this.value)">
             </div>
 
             <div id="div4" class="rule">
@@ -98,12 +95,24 @@
                 <input id = "f4" type="range" min="-2" max="2" step=".01" value="0.44" oninput ="updateValue(this, this.value)">
                 <p>Weight </p>
                 <input id = "weight4" type="range" min="0" max="1" step=".01" value="0.07" oninput ="updateValue(this, this.value)">
+                <p>Color</p>
+                <input id = "color4" type="color" value="#0000CC" oninput="updateValue(this, this.value)">
             </div>
 
         </div>
     </div>
     
-    <canvas id="canvas"></canvas>
+    <div id="canvas_container">
+        <form id="choose_fractal" action="#">
+            <select name="fractal" id="fractal" onchange="updateParameters();">
+                <option value="Barnsley Fern">Barnsley Fern</option>
+                <option value="Vortex">Vortex</option>
+                <option value="IFS Dragon">IFS Dragon</option>
+                <option value="Maple Leaf">Maple Leaf</option>
+            </select>
+        </form>
+        <canvas id="canvas"></canvas>
+    </div>
 
     <script src="rules.js"></script>
     <script src="fractals.js"></script>

@@ -1,13 +1,22 @@
 body{
-    background-color: white;
-    color: black;
+    background-color: black;
+    color: white;
 }
-#canvas{
+#canvas_container{
+    position: relative;
+    width: 50%;
+    height: 23em;
+    margin: 0px auto;
+}
+
+#choose_fractal{
     position: absolute;
-    /* bottom: 1%; */
-    left: 15%;
-    height: fit-content;
-    width: 70%;
+    right: 0;
+}
+
+#canvas{
+    width: 100%;
+    height: 100%;
     background-color: black;
     z-index: -1;
 }
@@ -35,7 +44,7 @@ body{
 }
 
 .rule{
-    background-color: beige;
+    /* background-color: beige; */
     width: auto;
     margin-right: 0.1em;
 }

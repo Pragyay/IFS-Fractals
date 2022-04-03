@@ -2,7 +2,7 @@
 function iterate(){
     console.log("iterate called");
     
-    for(let j=0; j<200; j++){
+    for(let j=0; j<300; j++){
         // choose a rule
         let rule = getRule(rules);
         
@@ -14,7 +14,7 @@ function iterate(){
         y = y1;
 
         // console.log(`x = ${x}, y = ${y}`);
-        plot(x, y);
+        plot(x, y, rule.Color);
     }
 
     if(paused){
@@ -36,11 +36,15 @@ function getRule(rules){
     }
 }
 
+function normalize(value, min, max){
+    return (value-min)/(max-min);
+}
 
 // plot a rectangle at position (x,y)
-function plot(x, y){
-    context.fillStyle = "white";
-    context.fillRect(x * 60, -y * 60 - 100, 1, 1);
+function plot(x, y, color){
+    context.fillStyle = color;
+    // y = normalize(y * 30000 + 100000, 0, -canvas.height);
+    context.fillRect(x * 60, -y * 50 - 130, 1, 1);
 }
 
 // initializes rules array
@@ -55,7 +59,8 @@ function init(rules){
             d = document.getElementById(`d${i}`),
             e = document.getElementById(`e${i}`),
             f = document.getElementById(`f${i}`),
-            weight = document.getElementById(`weight${i}`);
+            weight = document.getElementById(`weight${i}`),
+            color = document.getElementById(`color${i}`);
         
         // add values of all input sliders to corresponding parameters of the rule
         let rule = {
@@ -65,7 +70,8 @@ function init(rules){
             D: parseFloat(d.value),
             E: parseFloat(e.value),
             F: parseFloat(f.value),
-            W: parseFloat(weight.value)
+            W: parseFloat(weight.value),
+            Color: color.value
         };
 
         // display values in textviews above the sliders
@@ -150,6 +156,8 @@ function addRule(){
     <input id = "f${rule_number}" type="range" min="-2" max="2" step=".01" value="0.01" oninput="updateValue(this, this.value)">
     <p>Weight </p>
     <input id = "weight${rule_number}" type="range" min="0" max="1" step=".01" value="0.01" oninput="updateValue(this, this.value)">
+    <p>Color</p>
+    <input id = "color${rule_number}" type="color" value="#FFFFFF" oninput="updateValue(this, this.value)">
     </div>`
 
     rules_list_div.appendChild(rule);
@@ -184,6 +192,8 @@ function addRuleWithValues(fractal){
     <input id = "f${rule_number}" type="range" min="-2" max="2" step=".01" value="${fractal.f}" oninput="updateValue(this, this.value)">
     <p>Weight </p>
     <input id = "weight${rule_number}" type="range" min="0" max="1" step=".01" value="${fractal.weight}" oninput="updateValue(this, this.value)">
+    <p>Color</p>
+    <input id = "color${rule_number}" type="color" value="${fractal.color}" oninput="updateValue(this, this.value)">
     </div>`
 
     rules_list_div.appendChild(rule);
@@ -212,7 +222,8 @@ pauseBtn.addEventListener('click', function(){
 }); 
 
 let add_rule_btn = document.getElementById("add_rule"),
-    remove_rule_btn = document.getElementById("remove_rule");
+    remove_rule_btn = document.getElementById("remove_rule"),
+    reset_btn = document.getElementById("resetBtn");
 
 let rules_list_div = document.getElementById("rules_list");
 
@@ -237,6 +248,10 @@ remove_rule_btn.addEventListener("click", function(){
         console.log(rules);
         // console.log(rule_number);
     }
+});
+
+reset_btn.addEventListener("click", function(){
+   updateParameters(); 
 });
 
 // called when user selects a fractal from dropdown
@@ -303,6 +318,7 @@ let canvas = document.getElementById("canvas"),
     paused = false;
 
 context.translate(width/2, height);
+
 
 init(rules);
 

@@ -7,7 +7,7 @@ let BarnsleyFern = [
         e: 0,
         f: 0.01,
         weight: 0.01,
-        color: "yellow"
+        color: "#FFFF00"
     },
     // succesively smaller leaflets
     {
@@ -18,7 +18,7 @@ let BarnsleyFern = [
         e: 0,
         f: 1.6,
         weight: 0.85 ,
-        color: "green"
+        color: "#24D82A"
     },
     // largest left hand leaflet
     {
@@ -29,7 +29,7 @@ let BarnsleyFern = [
         e: 0,
         f: 1.6,
         weight: 0.07,
-        color: "red" 
+        color: "#CC0000" 
     },
     // largest right hand leaflet
     {
@@ -40,7 +40,7 @@ let BarnsleyFern = [
         e: 0,
         f: 0.44,
         weight: 0.07,
-        color: "blue"
+        color: "#0000CC"
     }
 ];
 
@@ -53,7 +53,7 @@ let Vortex = [
         e: 14.919102,
         f: 9.328625,
         weight: 0.912675,
-        color: "white"
+        color: "#00FFFF"
     },
     {
         a: -0.424242 ,  
@@ -63,7 +63,7 @@ let Vortex = [
         e: 3.809567,
         f: 6.741476,
         weight: 0.087325,
-        color: "cyan"
+        color: "#FFFFFF"
     }
 ];
 
@@ -76,17 +76,17 @@ let IFSDragon = [
         e: -1.882,
         f: -0.111,
         weight: 0.8, 
-        color: "white"
+        color: "#00FFFF"
     },
     {
         a: 0.0883,
         b:  0.521,
         c: -0.464,
-        d: -0.3778,
-        e: 0.785360,
+        d: -0.378,
+        e: 0.785,
         f: 8.096,
         weight: 0.2, 
-        color: "cyan"
+        color: "#FFFFFF"
     }
 ]
 
@@ -99,7 +99,7 @@ let MapleLeaf = [
         e: -0.08,
         f: -1.31,
         weight: 0.1, 
-        color: "white"
+        color: "#FFFFFF"
     },
     {
         a: 0.43,
@@ -109,7 +109,7 @@ let MapleLeaf = [
         e: 1.49,
         f: -0.75,
         weight: 0.35, 
-        color: "orange"
+        color: "#FF8000"
     },
     {
         a: 0.45,
@@ -119,7 +119,7 @@ let MapleLeaf = [
         e: 	-1.62,
         f: -0.74,
         weight: 0.35, 
-        color: "green"
+        color: "#FFFF00"
     },
     {
         a: 0.49,
@@ -129,7 +129,7 @@ let MapleLeaf = [
         e: 0.02,
         f: 2,
         weight: 0.2, 
-        color: "red"
+        color: "#FF99FF"
     }
 ]
 
