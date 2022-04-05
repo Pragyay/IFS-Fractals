@@ -2,15 +2,27 @@ body{
     background-color: black;
     color: white;
 }
-#canvas{
+
+#canvas_container{
+    position: relative;
+    width: 50%;
+    height: 23em;
+    margin: 0px auto;
+}
+
+#choose_fractal{
     position: absolute;
-    bottom: 1%;
-    left: 15%;
-    height: 70%;
-    width: 70%;
-    /* background-color: aqua; */
+    right: 0;
+}
+
+#canvas{
+    width: 100%;
+    height: 100%;
+    background-color: black;
     z-index: -1;
 }
+
+
 
 #container{
     display: flex;

@@ -39,6 +39,16 @@ function plot(x, y){
     context.fillRect(x * 800, -y * 800, 1, 1);
 }
 
+function pauseUnpause(){
+    paused = !paused;
+    if(!paused){
+        iterate();
+        pauseBtn.innerHTML = "Pause";
+    }else{
+        pauseBtn.innerHTML = "Start";
+    }
+}
+
 // initializes rules array
 function init(rules){
 
@@ -136,20 +146,14 @@ function updateValue(ele, value){
     if(paused){
         paused = false;
         pauseBtn.innerHTML = "Pause";
+        iterate();
     }
-    // iterate();
 }
 
 // update parameters and canvas when apply button is clicked
 let pauseBtn = document.getElementById("pauseBtn");
 pauseBtn.addEventListener('click', function(){
-    paused = !paused;
-    if(!paused){
-        iterate();
-        pauseBtn.innerHTML = "Pause";
-    }else{
-        pauseBtn.innerHTML = "Start";
-    }
+    pauseUnpause();
 }); 
 
 let add_rule_btn = document.getElementById("add_rule"),
@@ -157,7 +161,7 @@ let add_rule_btn = document.getElementById("add_rule"),
 
 let rules_list_div = document.getElementById("rules_list");
 
-let rule_number = 1;
+let rule_number = 4;
 
 add_rule_btn.addEventListener("click", function(){
         // alert("btn clicked");
@@ -201,6 +205,89 @@ remove_rule_btn.addEventListener("click", function(){
         // console.log(rule_number);
     }
 });
+
+function addRuleWithValues(fractal){
+    let rule = document.createElement("div");
+
+    rule_number += 1;
+    // console.log(rule_number);
+
+    rule.innerHTML = `<div id="div${rule_number}" class="rule">
+    <h5>Rule ${rule_number}</h5>
+    <p>A </p>
+    <input id = "a${rule_number}" type="range" min="-1" max="1" step=".01" value="${fractal.a}" oninput="updateValue(this, this.value)">
+    <p>B </p>
+    <input id = "b${rule_number}" type="range" min="-1" max="1" step=".01" value="${fractal.b}" oninput="updateValue(this, this.value)">
+    <p>C </p>
+    <input id = "c${rule_number}" type="range" min="-1" max="1" step=".01" value="${fractal.c}" oninput="updateValue(this, this.value)">
+    <p>D </p>
+    <input id = "d${rule_number}" type="range" min="-1" max="1" step=".01" value="${fractal.d}" oninput="updateValue(this, this.value)">
+    <p>E </p>
+    <input id = "e${rule_number}" type="range" min="-2" max="2" step=".01" value="${fractal.e}" oninput="updateValue(this, this.value)">
+    <p>Weight </p>
+    <input id = "weight${rule_number}" type="range" min="0" max="1" step=".01" value="${fractal.weight}" oninput="updateValue(this, this.value)">
+    </div>`
+
+    rules_list_div.appendChild(rule);
+
+}
+
+function updateParameters(){
+    paused = true;
+    // get the fractal that is selected
+    let option = document.getElementById("fractal");
+    let selected_fractal = option.options[option.selectedIndex].value;
+
+    // clear rules <div> inside rules_list <div>
+    while(rules_list_div.firstChild){
+            rules_list_div.removeChild(rules_list_div.lastChild);
+    }
+    // reset rule_number to 0
+    rule_number = 0;    
+
+    // clear rules array
+    rules = [];
+
+    // clear canvas
+    context.clearRect(-width/4, -height, width, height);
+
+    if(selected_fractal === "Barnsley Fern"){
+        // console.log("updated parameters 1");
+        for(let i=0;i<4;i++){
+            addRuleWithValues(BarnsleyFern[i]);
+        }
+        init(rules);
+    }
+    else if(selected_fractal === "Vortex"){
+        // console.log("updated parameters 2");
+        for(let i=0;i<2;i++){
+            addRuleWithValues(Vortex[i]);
+        }
+        init(rules);
+    }
+    else if(selected_fractal === "IFS Dragon"){
+        // console.log("updated parameters 2");
+        for(let i=0;i<2;i++){
+            addRuleWithValues(IFSDragon[i]);
+        }
+        init(rules);
+    }
+    else if(selected_fractal === "Maple Leaf"){
+        // console.log("updated parameters 2");
+        for(let i=0;i<4;i++){
+            addRuleWithValues(MapleLeaf[i]);
+        }
+        init(rules);
+    }
+    else if(selected_fractal === "Sierpinski Triangle"){
+        // console.log("updated parameters 2");
+        for(let i=0;i<4;i++){
+            addRuleWithValues(SierpinskiTriangle[i]);
+        }
+        init(rules);
+    }
+    pauseUnpause();
+}
 
 
 let canvas = document.getElementById("canvas"),
