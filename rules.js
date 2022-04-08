@@ -33,12 +33,17 @@ function getRule(rules){
     }
 }
 
-// plot a rectangle at position (x,y)
+// plot a rectangle at position (x,y) of specified color
 function plot(x, y, color){
     context.fillStyle = color;
     context.fillRect(x * 800, -y * 800, 1, 1);
 }
 
+//  if(paused){
+//     unpause, call iterate() and update html of pauseBtn accordingly
+// } else{
+//     pause and update html of pauseBtn accordingly
+// }
 function pauseUnpause(){
     paused = !paused;
     if(!paused){
@@ -50,6 +55,7 @@ function pauseUnpause(){
 }
 
 // initializes rules array
+// add rules with specific parameters to an array
 function init(rules){
 
     for(let i=1;i <= rule_number;i++){
@@ -98,6 +104,7 @@ function init(rules){
     console.log(rules);
 }
 
+// called when user uses input slider
 // update text field and canvas when user changes value
 function updateValue(ele, value){
     // get id of element that called updateValue() function
@@ -118,7 +125,6 @@ function updateValue(ele, value){
     // clear rules array
     rules = [];
 
-    // choose new X and Y values randomly
     if(class_name === "rotate"){
         let angle = parseFloat(obj.value);
 
@@ -152,69 +158,7 @@ function updateValue(ele, value){
     }
 }
 
-// update parameters and canvas when apply button is clicked
-let pauseBtn = document.getElementById("pauseBtn");
-pauseBtn.addEventListener('click', function(){
-    pauseUnpause();
-}); 
-
-let add_rule_btn = document.getElementById("add_rule"),
-    remove_rule_btn = document.getElementById("remove_rule"),
-    reset_btn = document.getElementById("resetBtn");
-
-let rules_list_div = document.getElementById("rules_list");
-
-let rule_number = 3;
-
-add_rule_btn.addEventListener("click", function(){
-        // alert("btn clicked");
-        let rule = document.createElement("div");
-        
-        rule_number += 1;
-        // console.log(rule_number);
-
-        rule.innerHTML = `<div id="div${rule_number}" class="rule">
-        <h5>Rule ${rule_number}</h5>
-        <p>Rotate </p>
-        <input id = "a${rule_number}" class="rotate" type="range" min="0" max="6.28" step=".04" value="0" oninput="updateValue(this, this.value)">
-        <p>ScaleX </p>
-        <input id = "b${rule_number}" class="scale" type="range" min="0" max="1" step=".01" value="0.5" oninput="updateValue(this, this.value)">
-        <p>ScaleY </p>
-        <input id = "c${rule_number}" class="scale" type="range" min="0" max="1" step=".01" value="0.5" oninput="updateValue(this, this.value)">
-        <p>TranslateX </p>
-        <input id = "d${rule_number}" class="translate" type="range" min="0" max="1" step=".01" value="0.25" oninput="updateValue(this, this.value)">
-        <p>TranslateY </p>
-        <input id = "e${rule_number}" class="translate" type="range" min="0" max="1" step=".01" value="0.35" oninput="updateValue(this, this.value)">
-        <p>Weight </p>
-        <input id = "weight${rule_number}" type="range" min="0" max="1" step=".01" value="0.35 " oninput="updateValue(this, this.value)">
-        <p>Color</p>
-        <input id = "color${rule_number}" class="Color" type="color" value="#FFFFFF" oninput="updateValue(this, this.value)">
-    </div>`
-        
-        rules_list_div.appendChild(rule);
-
-        // rules.push(rule);
-        rules = [];
-        init(rules);
-        // console.log(rules);  
-});
-
-remove_rule_btn.addEventListener("click", function(){
-    
-    if(rule_number > 0){
-        let rule = document.querySelector(`#div${rule_number}`);
-        rule.remove();
-        rule_number -= 1;
-        rules.pop();
-        console.log(rules);
-        // console.log(rule_number);
-    }
-});
-
-reset_btn.addEventListener("click", function(){
-    updateParameters(); 
- });
-
+// function to add a rule with pre-defined values of specified fractal
 function addRuleWithValues(fractal){
     let rule = document.createElement("div");
 
@@ -240,9 +184,13 @@ function addRuleWithValues(fractal){
     </div>`
 
     rules_list_div.appendChild(rule);
-
 }
 
+// called when user selects a fractal from dropdown
+// - clears all <divs> inside rules_list <div>
+// - clears rules[] array
+// - clears canvas
+// - then calls addRuleWithValues(fractal_name) n number of times
 function updateParameters(){
     paused = true;
     // get the fractal that is selected
@@ -300,12 +248,72 @@ function updateParameters(){
     pauseUnpause();
 }
 
+// update parameters and canvas when apply button is clicked
+let pauseBtn = document.getElementById("pauseBtn"),
+    add_rule_btn = document.getElementById("add_rule"),
+    remove_rule_btn = document.getElementById("remove_rule"),
+    reset_btn = document.getElementById("resetBtn"),
+    rules_list_div = document.getElementById("rules_list");
+
+pauseBtn.addEventListener('click', function(){
+    pauseUnpause();
+}); 
+
+add_rule_btn.addEventListener("click", function(){
+        let rule = document.createElement("div");
+        
+        rule_number += 1;
+        // console.log(rule_number);
+
+        rule.innerHTML = `<div id="div${rule_number}" class="rule">
+        <h5>Rule ${rule_number}</h5>
+        <p>Rotate </p>
+        <input id = "a${rule_number}" class="rotate" type="range" min="0" max="6.28" step=".04" value="0" oninput="updateValue(this, this.value)">
+        <p>ScaleX </p>
+        <input id = "b${rule_number}" class="scale" type="range" min="0" max="1" step=".01" value="0.5" oninput="updateValue(this, this.value)">
+        <p>ScaleY </p>
+        <input id = "c${rule_number}" class="scale" type="range" min="0" max="1" step=".01" value="0.5" oninput="updateValue(this, this.value)">
+        <p>TranslateX </p>
+        <input id = "d${rule_number}" class="translate" type="range" min="0" max="1" step=".01" value="0.25" oninput="updateValue(this, this.value)">
+        <p>TranslateY </p>
+        <input id = "e${rule_number}" class="translate" type="range" min="0" max="1" step=".01" value="0.35" oninput="updateValue(this, this.value)">
+        <p>Weight </p>
+        <input id = "weight${rule_number}" type="range" min="0" max="1" step=".01" value="0.35 " oninput="updateValue(this, this.value)">
+        <p>Color</p>
+        <input id = "color${rule_number}" class="Color" type="color" value="#FFFFFF" oninput="updateValue(this, this.value)">
+    </div>`
+        
+        rules_list_div.appendChild(rule);
+
+        // rules.push(rule);
+        rules = [];
+        init(rules);
+        // console.log(rules);  
+});
+
+remove_rule_btn.addEventListener("click", function(){
+    
+    if(rule_number > 0){
+        let rule = document.querySelector(`#div${rule_number}`);
+        rule.remove();
+        rule_number -= 1;
+        rules.pop();
+        console.log(rules);
+        // console.log(rule_number);
+    }
+});
+
+reset_btn.addEventListener("click", function(){
+    updateParameters(); 
+});
+
 
 let canvas = document.getElementById("canvas"),
     context = canvas.getContext("2d"),
     width = canvas.width = window.innerWidth,
     height = canvas.height = window.innerHeight,
     rules = [],
+    rule_number = 3,
     paused = false;
 
 context.translate(width/4, height);
