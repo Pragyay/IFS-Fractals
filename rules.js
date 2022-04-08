@@ -187,6 +187,8 @@ add_rule_btn.addEventListener("click", function(){
         <input id = "e${rule_number}" class="translate" type="range" min="0" max="1" step=".01" value="0.35" oninput="updateValue(this, this.value)">
         <p>Weight </p>
         <input id = "weight${rule_number}" type="range" min="0" max="1" step=".01" value="0.35 " oninput="updateValue(this, this.value)">
+        <p>Color</p>
+        <input id = "color${rule_number}" class="Color" type="color" value="#FFFFFF" oninput="updateValue(this, this.value)">
     </div>`
         
         rules_list_div.appendChild(rule);
@@ -234,7 +236,7 @@ function addRuleWithValues(fractal){
     <p>Weight </p>
     <input id = "weight${rule_number}" type="range" min="0" max="1" step=".01" value="${fractal.weight}" oninput="updateValue(this, this.value)">
     <p>Color</p>
-    <input id = "color${rule_number}" type="color" value="${fractal.color}" oninput="updateValue(this, this.value)">
+    <input id = "color${rule_number}" class="Color" type="color" value="${fractal.color}" oninput="updateValue(this, this.value)">
     </div>`
 
     rules_list_div.appendChild(rule);
