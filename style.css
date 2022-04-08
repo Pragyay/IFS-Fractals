@@ -62,15 +62,32 @@ body{
 }
 
 /* seekbar  */
-.rule input{
+.rule input[type="range"]{
      /* Override default CSS styles */
     margin: 0;
     width: 90%; 
     height: fit-content; /* Specified height */
-    background: #d3d3d3; /* Grey background */
+    background: transparent; 
     outline: none; /* Remove outline */
     opacity: 0.7; /* Set transparency (for mouse-over effects on hover) */
     -webkit-transition: .2s; /* 0.2 seconds transition on hover */
     transition: opacity .2s;
     font-size: smaller;
-    }
+    cursor: pointer;
+}
+
+.Color{
+    appearance: none;
+    width: 90%;
+    height: 20px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+.Color::-webkit-color-swatch{
+    border-radius: 25px;
+}
+.Color::-webkit-color-swatch{
+    border-radius: 20px;
+}

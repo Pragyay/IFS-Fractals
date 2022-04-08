@@ -99,6 +99,22 @@ function init(rules){
     console.log(rules);
 }
 
+//  if(paused){
+//     unpause, call iterate() and update html of pauseBtn accordingly
+// } else{
+//     pause and update html of pauseBtn accordingly
+// }
+function pauseUnpause(){
+    paused = !paused;
+    if(!paused){
+        iterate();
+        pauseBtn.innerHTML = "Pause";
+    }else{
+        pauseBtn.innerHTML = "Start";
+    }
+}
+
+// called when user uses input range 
 // update text field and canvas when user changes value
 function updateValue(ele, value){
     // get id of element that called updateValue() function
@@ -157,7 +173,7 @@ function addRule(){
     <p>Weight </p>
     <input id = "weight${rule_number}" type="range" min="0" max="1" step=".01" value="0.01" oninput="updateValue(this, this.value)">
     <p>Color</p>
-    <input id = "color${rule_number}" type="color" value="#FFFFFF" oninput="updateValue(this, this.value)">
+    <input id = "color${rule_number}" class="Color" type="color" value="#FFFFFF" oninput="updateValue(this, this.value)">
     </div>`
 
     rules_list_div.appendChild(rule);
@@ -193,73 +209,19 @@ function addRuleWithValues(fractal){
     <p>Weight </p>
     <input id = "weight${rule_number}" type="range" min="0" max="1" step=".01" value="${fractal.weight}" oninput="updateValue(this, this.value)">
     <p>Color</p>
-    <input id = "color${rule_number}" type="color" value="${fractal.color}" oninput="updateValue(this, this.value)">
+    <input id = "color${rule_number}" class="Color" type="color" value="${fractal.color}" oninput="updateValue(this, this.value)">
     </div>`
 
     rules_list_div.appendChild(rule);
-
 }
 
-//  if(paused){
-//     unpause, call iterate() and update html of pauseBtn accordingly
-// } else{
-//     pause and update html of pauseBtn accordingly
-// }
-function pauseUnpause(){
-    paused = !paused;
-    if(!paused){
-        iterate();
-        pauseBtn.innerHTML = "Pause";
-    }else{
-        pauseBtn.innerHTML = "Start";
-    }
-}
-
-// update parameters and canvas when apply button is clicked
-let pauseBtn = document.getElementById("pauseBtn");
-pauseBtn.addEventListener('click', function(){
-    pauseUnpause();
-}); 
-
-let add_rule_btn = document.getElementById("add_rule"),
-    remove_rule_btn = document.getElementById("remove_rule"),
-    reset_btn = document.getElementById("resetBtn");
-
-let rules_list_div = document.getElementById("rules_list");
-
-let rule_number = 4;
-
-// add a rule
-add_rule_btn.addEventListener("click", function(){
-        // alert("btn clicked");
-        addRule();
-});
-
-// remove a rule
-remove_rule_btn.addEventListener("click", function(){
-
-    if(rule_number > 0){
-        // paused = true;
-        let rule = document.querySelector(`#div${rule_number}`);
-        rule.remove();
-        rule_number -= 1;
-        rules.pop();
-        // pauseUnpause();
-        console.log(rules);
-        // console.log(rule_number);
-    }
-});
-
-reset_btn.addEventListener("click", function(){
-   updateParameters(); 
-});
-
-// called when user selects a fractal from dropdown
+// called when user selects a fractal from dropdown or when reset button is clicked
+// - makes pause = true 
 // - clears all <divs> inside rules_list <div>
 // - clears rules[] array
 // - clears canvas
 // - then calls addRuleWithValues(fractal_name)
-
+// - then calls pauseUnpause(), which calls iterate()
 function updateParameters(){
     paused = true;
     // get the fractal that is selected
@@ -310,15 +272,51 @@ function updateParameters(){
     pauseUnpause();
 }
 
+let add_rule_btn = document.getElementById("add_rule"),
+remove_rule_btn = document.getElementById("remove_rule"),
+reset_btn = document.getElementById("resetBtn"),
+pauseBtn = document.getElementById("pauseBtn"),
+rules_list_div = document.getElementById("rules_list");
+
+// update parameters and canvas when apply button is clicked
+pauseBtn.addEventListener('click', function(){
+    pauseUnpause();
+}); 
+
+// add a rule
+add_rule_btn.addEventListener("click", function(){
+        // alert("btn clicked");
+        addRule();
+});
+
+// remove a rule
+remove_rule_btn.addEventListener("click", function(){
+
+    if(rule_number > 0){
+        // paused = true;
+        let rule = document.querySelector(`#div${rule_number}`);
+        rule.remove();
+        rule_number -= 1;
+        rules.pop();
+        // pauseUnpause();
+        console.log(rules);
+        // console.log(rule_number);
+    }
+});
+
+reset_btn.addEventListener("click", function(){
+   updateParameters(); 
+});
+
 let canvas = document.getElementById("canvas"),
     context = canvas.getContext("2d"),
     width = canvas.width = window.innerWidth,
     height = canvas.height = window.innerHeight,
-    rules = [],
+    rules = []
+    rule_number = 4,
     paused = false;
 
 context.translate(width/2, height);
-
 
 init(rules);
 
