@@ -129,7 +129,7 @@ let SierpinskiTriangle = [
         d:0,
         e: 0,
         weight: 0.3, 
-        color: "#FFFFFF"
+        color: "#0000CC"
     },
     {
         a: 0,
@@ -138,7 +138,7 @@ let SierpinskiTriangle = [
         d: 0.5,
         e: 0,
         weight: 0.28, 
-        color: "#FFFFFF"
+        color: "#24D82A"
     },
     {
         a: 0,
@@ -147,15 +147,6 @@ let SierpinskiTriangle = [
         d: 0.25,
         e: 0.35,
         weight: 0.47, 
-        color: "#FFFFFF"
-    },
-    {
-        a: 0.16,
-        b: 0.28,
-        c: 0.26,
-        d: 0.24,
-        e: 0,
-        weight: 0.3, 
-        color: "#FFFFFF"
+        color: "#CC0000"
     }
 ];

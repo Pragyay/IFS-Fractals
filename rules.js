@@ -12,7 +12,7 @@ function iterate(){
         y = y1;
 
         // console.log(`x = ${x}, y = ${y}`);
-        plot(x, y);
+        plot(x, y, rule.Color);
     }
 
     if(paused){
@@ -34,8 +34,8 @@ function getRule(rules){
 }
 
 // plot a rectangle at position (x,y)
-function plot(x, y){
-    context.fillStyle = "white";
+function plot(x, y, color){
+    context.fillStyle = color;
     context.fillRect(x * 800, -y * 800, 1, 1);
 }
 
@@ -60,7 +60,8 @@ function init(rules){
             sy = (document.querySelector(`#c${i}`).value),
             tx = (document.querySelector(`#d${i}`).value),
             ty = (document.querySelector(`#e${i}`).value),
-            weight = (document.querySelector(`#weight${i}`).value);
+            weight = (document.querySelector(`#weight${i}`).value),
+            color = document.querySelector(`#color${i}`).value;
         
         // add values of all input sliders to corresponding parameters of the rule
         let rule = {
@@ -70,7 +71,8 @@ function init(rules){
             D: +(Math.cos(angle)*sy).toFixed(2),
             E: parseFloat(tx),
             F: parseFloat(ty),
-            W: parseFloat(weight)
+            W: parseFloat(weight),
+            Color: color
         };
 
         // display values in textviews above the sliders
@@ -132,7 +134,7 @@ function updateValue(ele, value){
 
         x = sx*x;
         y = sy*y;
-    }else{
+    }else if(class_name === "translate"){
         let tx = parseFloat(obj.value),
             ty = parseFloat(obj.value);
 
@@ -162,7 +164,7 @@ let add_rule_btn = document.getElementById("add_rule"),
 
 let rules_list_div = document.getElementById("rules_list");
 
-let rule_number = 4;
+let rule_number = 3;
 
 add_rule_btn.addEventListener("click", function(){
         // alert("btn clicked");
@@ -231,6 +233,8 @@ function addRuleWithValues(fractal){
     <input id = "e${rule_number}" type="range" min="-2" max="2" step=".01" value="${fractal.e}" oninput="updateValue(this, this.value)">
     <p>Weight </p>
     <input id = "weight${rule_number}" type="range" min="0" max="1" step=".01" value="${fractal.weight}" oninput="updateValue(this, this.value)">
+    <p>Color</p>
+    <input id = "color${rule_number}" type="color" value="${fractal.color}" oninput="updateValue(this, this.value)">
     </div>`
 
     rules_list_div.appendChild(rule);
@@ -286,7 +290,7 @@ function updateParameters(){
     }
     else if(selected_fractal === "Sierpinski Triangle"){
         // console.log("updated parameters 2");
-        for(let i=0;i<4;i++){
+        for(let i=0;i<3;i++){
             addRuleWithValues(SierpinskiTriangle[i]);
         }
         init(rules);
