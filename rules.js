@@ -157,7 +157,8 @@ pauseBtn.addEventListener('click', function(){
 }); 
 
 let add_rule_btn = document.getElementById("add_rule"),
-    remove_rule_btn = document.getElementById("remove_rule");
+    remove_rule_btn = document.getElementById("remove_rule"),
+    reset_btn = document.getElementById("resetBtn");
 
 let rules_list_div = document.getElementById("rules_list");
 
@@ -206,6 +207,10 @@ remove_rule_btn.addEventListener("click", function(){
     }
 });
 
+reset_btn.addEventListener("click", function(){
+    updateParameters(); 
+ });
+
 function addRuleWithValues(fractal){
     let rule = document.createElement("div");
 
@@ -249,7 +254,7 @@ function updateParameters(){
     rules = [];
 
     // clear canvas
-    context.clearRect(-width/4, -height, width, height);
+    context.clearRect(-width/4  , -height, width, height);
 
     if(selected_fractal === "Barnsley Fern"){
         // console.log("updated parameters 1");
