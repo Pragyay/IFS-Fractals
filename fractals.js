@@ -133,3 +133,35 @@ let MapleLeaf = [
     }
 ]
 
+let Babylon = [
+    {
+        a: 0,
+        b: -0.5,
+        c: 0.85,
+        d: 0,
+        e: -1.73,
+        f: 3.36,
+        weight: 0.333, 
+        color: "#f6eb79"
+    },
+    {
+        a: 0.3,
+        b: 0,
+        c: 0,
+        d: 0.3,
+        e: -0.03,
+        f: 5.014,
+        weight: 0.333, 
+        color: "#eaa9f2"
+    },
+    {
+        a: 0,
+        b: 0.5,
+        c: -0.85,
+        d: 0,
+        e: 1.62,
+        f: 3.31,
+        weight: 0.34, 
+        color: "#ffffff"
+    }
+]

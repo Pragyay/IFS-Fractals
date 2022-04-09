@@ -269,6 +269,13 @@ function updateParameters(){
         }
         init(rules);
     }
+    else if(selected_fractal === "Babylon"){
+        // console.log("updated parameters 2");
+        for(let i=0;i<3;i++){
+            addRuleWithValues(Babylon[i]);
+        }
+        init(rules);
+    }
     pauseUnpause();
 }
 
