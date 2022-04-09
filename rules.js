@@ -168,13 +168,13 @@ function addRuleWithValues(fractal){
     rule.innerHTML = `<div id="div${rule_number}" class="rule">
     <h5>Rule ${rule_number}</h5>
     <p>A </p>
-    <input id = "a${rule_number}" type="range" min="-1" max="1" step=".01" value="${fractal.a}" oninput="updateValue(this, this.value)">
+    <input id = "a${rule_number}" type="range" min="0" max="6.28" step=".01" value="${fractal.a}" oninput="updateValue(this, this.value)">
     <p>B </p>
     <input id = "b${rule_number}" type="range" min="-1" max="1" step=".01" value="${fractal.b}" oninput="updateValue(this, this.value)">
     <p>C </p>
     <input id = "c${rule_number}" type="range" min="-1" max="1" step=".01" value="${fractal.c}" oninput="updateValue(this, this.value)">
     <p>D </p>
-    <input id = "d${rule_number}" type="range" min="-1" max="1" step=".01" value="${fractal.d}" oninput="updateValue(this, this.value)">
+    <input id = "d${rule_number}" type="range" min="-2" max="2" step=".01" value="${fractal.d}" oninput="updateValue(this, this.value)">
     <p>E </p>
     <input id = "e${rule_number}" type="range" min="-2" max="2" step=".01" value="${fractal.e}" oninput="updateValue(this, this.value)">
     <p>Weight </p>
@@ -210,10 +210,10 @@ function updateParameters(){
     // clear canvas
     context.clearRect(-width/4  , -height, width, height);
 
-    if(selected_fractal === "Barnsley Fern"){
+    if(selected_fractal === "Babylon"){
         // console.log("updated parameters 1");
-        for(let i=0;i<4;i++){
-            addRuleWithValues(BarnsleyFern[i]);
+        for(let i=0;i<3;i++){
+            addRuleWithValues(Babylon[i]);
         }
         init(rules);
     }
@@ -259,7 +259,7 @@ pauseBtn.addEventListener('click', function(){
     pauseUnpause();
 }); 
 
-add_rule_btn.addEventListener("click", function(){
+add_rule_btn.addEventListener("click", function(){  
         let rule = document.createElement("div");
         
         rule_number += 1;

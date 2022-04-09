@@ -1,44 +1,44 @@
-let BarnsleyFern = [
-    {
-        a: 0,
-        b: 0,
-        c: 0,
-        d: 0.2,
-        e: 0,
-        weight: 0.01,
-        color: "#FFFF00"
-    },
-    // succesively smaller leaflets
-    {
-        a: 0.85,
-        b: 0.04,
-        c: -0.04,
-        d: 0.85,
-        e: 0,
-        weight: 0.85 ,
-        color: "#24D82A"
-    },
-    // largest left hand leaflet
-    {
-        a: 0.20,
-        b: -0.26,
-        c: 0.23,
-        d: 0.22,
-        e: 0,
-        weight: 0.07,
-        color: "#CC0000" 
-    },
-    // largest right hand leaflet
-    {
-        a: -0.15,
-        b: 0.28,
-        c: 0.26,
-        d: 0.24,
-        e: 0,
-        weight: 0.07,
-        color: "#0000CC"
-    }
-];
+// let BarnsleyFern = [
+//     {
+//         a: 0,
+//         b: 0,
+//         c: 0,
+//         d: 0,
+//         e: 0,
+//         weight: 0.01,
+//         color: "#FFFF00"
+//     },
+//     // succesively smaller leaflets
+//     {
+//         a: 0.05,
+//         b: 0.86,
+//         c: 0.85,
+//         d: 0.06,
+//         e: 1.6,
+//         weight: 0.85 ,
+//         color: "#24D82A"
+//     },
+//     // largest left hand leaflet
+//     {
+//         a: 1.11,
+//         b: -0.22,
+//         c: 0.41,
+//         d: 0.03,
+//         e: 0.76,
+//         weight: 0.07,
+//         color: "#CC0000" 
+//     },
+//     // largest right hand leaflet
+//     {
+//         a: 2.19,
+//         b: -0.28,
+//         c: -0.52,
+//         d: 0.12,
+//         e: 0.81,
+//         weight: 0.07,
+//         color: "#0000CC"
+//     }
+// ];
 
 // let MapleLeaf = [
 //     {
@@ -150,3 +150,33 @@ let SierpinskiTriangle = [
         color: "#CC0000"
     }
 ];
+
+let Babylon = [
+    {
+        a: 3.14,
+        b: -0.85,
+        c: -0.5,
+        d: -1.73,
+        e: 3.37,
+        weight: 0.333, 
+        color: "#f6eb79"
+    },
+    {
+        a: 0,
+        b: 0.3,
+        c: 0.3,
+        d: -0.027,
+        e: 5.014,
+        weight: 0.333, 
+        color: "#eaa9f2"
+    },
+    {
+        a: 3.14,
+        b: 0.85,
+        c: 0.5,
+        d: 1.62,
+        e: 3.31,
+        weight: 0.34, 
+        color: "#ffffff"
+    }
+]
