@@ -15,6 +15,17 @@
             <button id="remove_rule">Remove rule</button>
             <button id="add_rule">Add rule</button> 
             <button id="resetBtn">Reset</button>
+            <form id="choose_fractal" action="#">
+                <select name="fractal" id="fractal" onchange="updateParameters();">
+                    <option value="Barnsley Fern">Barnsley Fern</option>
+                    <option value="Vortex">Vortex</option>
+                    <option value="IFS Dragon">IFS Dragon</option>
+                    <option value="Maple Leaf">Maple Leaf</option>
+                    <option value="Babylon">Babylon</option>
+                    <option value="Wreath">Wreath</option>
+                    <option value="Twig">Twig</option>
+                </select>
+            </form>
         </div>
 
 
@@ -103,15 +114,6 @@
     </div>
     
     <div id="canvas_container">
-        <form id="choose_fractal" action="#">
-            <select name="fractal" id="fractal" onchange="updateParameters();">
-                <option value="Barnsley Fern">Barnsley Fern</option>
-                <option value="Vortex">Vortex</option>
-                <option value="IFS Dragon">IFS Dragon</option>
-                <option value="Maple Leaf">Maple Leaf</option>
-                <option value="Babylon">Babylon</option>
-            </select>
-        </form>
         <canvas id="canvas"></canvas>
     </div>
 

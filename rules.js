@@ -1,8 +1,8 @@
 // function that draws the fractals
 function iterate(){
-    console.log("iterate called");
+    // console.log("iterate called");
     
-    for(let j=0; j<300; j++){
+    for(let j=0; j<200; j++){
         // choose a rule
         let rule = getRule(rules);
         
@@ -18,7 +18,6 @@ function iterate(){
     }
 
     if(paused){
-        cancelAnimationFrame(id);
         return;
     }
     let id = requestAnimationFrame(iterate);
@@ -50,6 +49,7 @@ function plot(x, y, color){
 // initializes rules array
 function init(rules){
 
+    let total_weight = 0.0;
     for(let i = 1; i <= rule_number; i++){
 
         // get all input sliders by ID
@@ -95,8 +95,16 @@ function init(rules){
         
         // append rule to rules[] array
         rules[i-1] = rule;
+
+        total_weight += rule.W;
+        console.log(total_weight);
     }
-    console.log(rules);
+    if(total_weight < 1.0){
+        alert("Please ensure that the sum of the weights is greater than equal to 1.");
+    }
+    else{
+        console.log(rules);
+    }
 }
 
 //  if(paused){
@@ -273,6 +281,20 @@ function updateParameters(){
         // console.log("updated parameters 2");
         for(let i=0;i<3;i++){
             addRuleWithValues(Babylon[i]);
+        }
+        init(rules);
+    }
+    else if(selected_fractal === "Wreath"){
+        // console.log("updated parameters 2");
+        for(let i=0;i<2;i++){
+            addRuleWithValues(Wreath[i]);
+        }
+        init(rules);
+    }
+    else if(selected_fractal === "Twig"){
+        // console.log("updated parameters 2");
+        for(let i=0;i<3;i++){
+            addRuleWithValues(Twig[i]);
         }
         init(rules);
     }

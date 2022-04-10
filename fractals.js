@@ -88,7 +88,7 @@ let IFSDragon = [
         weight: 0.2, 
         color: "#FFFFFF"
     }
-]
+];
 
 let MapleLeaf = [
     {
@@ -131,7 +131,7 @@ let MapleLeaf = [
         weight: 0.2, 
         color: "#FF99FF"
     }
-]
+];
 
 let Babylon = [
     {
@@ -164,4 +164,60 @@ let Babylon = [
         weight: 0.34, 
         color: "#ffffff"
     }
-]
+];
+
+let Wreath = [
+    {
+        a: 0.48,
+        b: -0.823,
+        c: 0.823,
+        d: 0.48,
+        e: 2,
+        f: 1,
+        weight: 0.8, 
+        color: "#00FFFF"
+    },
+    {
+        a: 0.5,
+        b:  0.5,
+        c: 0,
+        d: 0.5,
+        e: 1.27,
+        f: 0,
+        weight: 0.2, 
+        color: "#FFFFFF"
+    }
+];
+
+let Twig = [
+    {
+        a: -0.46,
+        b: 0.02,
+        c: -0.113,
+        d: 0.015,
+        e: 0.4,
+        f: 0.4,
+        weight: 0.2, 
+        color: "#FFFFFF"
+    },
+    {
+        a: 0.39,
+        b:  0.43,
+        c: 0.43,
+        d: -0.39,
+        e: 0.26,
+        f: 0.522,
+        weight: 0.4, 
+        color: "#FF8000"
+    },
+    {
+        a: 0.44,
+        b:  -0.091,
+        c: -0.091,
+        d: -0.32,
+        e: 	0.42,
+        f: 0.505,
+        weight: 0.4, 
+        color: "#FFFF00"
+    }
+];
