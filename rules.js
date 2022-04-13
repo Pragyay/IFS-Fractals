@@ -101,6 +101,7 @@ function init(rules){
     }
     if(total_weight < 1.0){
         alert("Please ensure that the sum of the weights is greater than equal to 1.");
+        rules = [];
     }
     else{
         console.log(rules);
